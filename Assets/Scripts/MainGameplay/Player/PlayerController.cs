@@ -7,10 +7,17 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private int _speed = 5;
     private PhotonView pv;
+    private Camera _camera;
 
     private void Awake()
     {
         pv = GetComponent<PhotonView>();
+        _camera = GetComponentInChildren<Camera>();
+    }
+
+    private void Start()
+    {
+        _camera.gameObject.SetActive(pv.IsMine);
     }
 
     private void Update()
