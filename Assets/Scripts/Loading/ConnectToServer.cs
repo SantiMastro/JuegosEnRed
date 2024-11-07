@@ -11,6 +11,6 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(2);
     }
 }
