@@ -11,6 +11,7 @@ public class EnemySpawn : MonoBehaviour
 
     private bool readyToSpawn;
     private float timer;
+    private bool matchStarted = false;  
 
     private void Start()
     {
@@ -19,10 +20,18 @@ public class EnemySpawn : MonoBehaviour
 
     private void Update()
     {
-        if(PhotonNetwork.IsMasterClient)
+        if(PhotonNetwork.CurrentRoom.PlayerCount >= 2) //if el cual se encarga de verificar que empiecen a spawn de enemigos cuando los players sean igual o mayor a 2
         {
-            timer += Time.deltaTime;
-            SpawnEnemies();
+            matchStarted = true;
+            if (PhotonNetwork.IsMasterClient)
+            {
+                timer += Time.deltaTime;
+                SpawnEnemies();
+            }
+        }
+        else if (PhotonNetwork.CurrentRoom.PlayerCount < 2 && matchStarted) //if de cuando la cantidad de jugadores es la requerida y la partida empezó, cuando alguien se desconecta mandará un mensaje de error.
+        {
+            Debug.Log("Un jugador se desconectó!");
         }
     }
 
