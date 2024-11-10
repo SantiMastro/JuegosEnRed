@@ -251,3 +251,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb06fa12c7b5174fa1eb46241dab4d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
+  health: 100
+  damage: 10
+  scoreValue: 50
+  dropChance: 0.3
+  healthDropChance: 0.8
+  healthDropPrefab: {fileID: 0}
+  ammoDropPrefab: {fileID: 0}
