@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6476181985269418350}
   - component: {fileID: 2771668281523388336}
   - component: {fileID: 2520692308066446980}
+  - component: {fileID: 7340669450344831719}
   m_Layer: 0
   m_Name: Enemy_Tank
   m_TagString: Enemy
@@ -238,3 +239,15 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &7340669450344831719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5778511570450183752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb06fa12c7b5174fa1eb46241dab4d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

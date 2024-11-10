@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int _speed = 5;
     private PhotonView pv;
     private Camera _camera;
+    private int totalCoins = 0; // Total de monedas recogidas
 
     private void Awake()
     {
@@ -45,6 +46,19 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += Vector3.right * _speed * Time.deltaTime;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (pv.IsMine && other.CompareTag("Coin"))
+        {
+            Coin coin = other.GetComponent<Coin>();
+            if (coin != null)
+            {
+                totalCoins += coin.GetValue();
+                PhotonNetwork.Destroy(other.gameObject); // Destruir la moneda en la red
+                Debug.Log("Monedas totales: " + totalCoins);
+            }
         }
     }
 }
