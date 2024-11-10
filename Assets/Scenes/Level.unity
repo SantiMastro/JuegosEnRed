@@ -90800,9 +90800,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48af4902ae29ef946b51107dc4ec5113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 6964739418415742041, guid: 34e2d2f8c00098345afaece8fffddc71, type: 3}
+  normalZombiePrefab: {fileID: 6964739418415742041, guid: 34e2d2f8c00098345afaece8fffddc71, type: 3}
+  fastZombiePrefab: {fileID: 5647253935529803240, guid: b059331b2c9c5de46a2e8d8fe083347d, type: 3}
+  tankZombiePrefab: {fileID: 5778511570450183752, guid: 3d57d35d028bb324c9eb4a30c0a63e56, type: 3}
   timeToStartSpawning: 5
   timeBetweenSpawn: 2
+  timeBetweenWaves: 10
 --- !u!4 &1663884504
 Transform:
   m_ObjectHideFlags: 0
