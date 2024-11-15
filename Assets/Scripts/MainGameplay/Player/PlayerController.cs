@@ -47,4 +47,28 @@ public class PlayerController : MonoBehaviour
             transform.position += Vector3.right * _speed * Time.deltaTime;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (pv.IsMine && collision.transform.CompareTag("Coin"))
+        {
+            PhotonView photonView = PhotonView.Get(this);
+            photonView.RPC("CollectCoin", RpcTarget.AllBuffered, collision.gameObject.GetComponent<PhotonView>().ViewID);
+        }
+    }
+
+    [PunRPC]
+    
+    void CollectCoin(int coinViewID)
+    {
+         PhotonView coinPhotonView = PhotonView.Find(coinViewID);
+         if (coinPhotonView != null)
+        {
+            PhotonNetwork.Destroy(coinPhotonView.gameObject);
+            if (pv.IsMine)
+            {
+                GameManager.instance.AddCoinToPool();
+            }
+         }
+    }
 }
