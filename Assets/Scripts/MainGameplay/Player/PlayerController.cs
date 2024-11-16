@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private int _speed = 5;
+    [SerializeField] TMPro.TextMeshPro _nicknamePlayer;
     private PhotonView pv;
     private Camera _camera;
     private Animator _animator;
@@ -15,6 +17,17 @@ public class PlayerController : MonoBehaviour
         pv = GetComponent<PhotonView>();
         _camera = GetComponentInChildren<Camera>();
         _animator = GetComponent<Animator>();
+
+        if (pv.IsMine)
+        {
+            _nicknamePlayer.text = PhotonNetwork.NickName.ToString();
+            Debug.Log(PhotonNetwork.NickName);
+        }
+        else
+        {
+            _nicknamePlayer.text = pv.Owner.NickName.ToString();
+            Debug.Log(pv.Owner.NickName);
+        }
     }
 
     private void Start()
