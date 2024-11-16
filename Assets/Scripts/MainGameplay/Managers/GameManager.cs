@@ -22,9 +22,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddCoinToPool()
+    public void AddCoinToPool(int coinsValue)
     {
-        totalCoins++;
+        totalCoins += coinsValue;
         UpdateCoinsText();
         Debug.Log("Total coins is: " + totalCoins);
     }
