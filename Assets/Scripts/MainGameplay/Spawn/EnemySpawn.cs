@@ -5,50 +5,7 @@ using Photon.Pun;
 
 public class EnemySpawn : MonoBehaviour
 {
-    //[SerializeField] private GameObject _enemyPrefab;
-    //[SerializeField] private float timeToStartSpawning;
-    //[SerializeField] private float timeBetweenSpawn;
-
-    //private bool readyToSpawn;
-    //private float timer;
-    //private bool matchStarted = false;  
-
-    //private void Start()
-    //{
-    //    timer = 0;
-    //}
-
-    //private void Update()
-    //{
-    //    if(PhotonNetwork.CurrentRoom.PlayerCount >= 2) //if el cual se encarga de verificar que empiecen a spawn de enemigos cuando los players sean igual o mayor a 2
-    //    {
-    //        matchStarted = true;
-    //        if (PhotonNetwork.IsMasterClient)
-    //        {
-    //            timer += Time.deltaTime;
-    //            SpawnEnemies();
-    //        }
-    //    }
-    //    else if (PhotonNetwork.CurrentRoom.PlayerCount < 2 && matchStarted) //if de cuando la cantidad de jugadores es la requerida y la partida empezó, cuando alguien se desconecta mandará un mensaje de error.
-    //    {
-    //        Debug.Log("Un jugador se desconectó!");
-    //    }
-    //}
-
-    //private void SpawnEnemies()
-    //{
-    //    if (!readyToSpawn && timeToStartSpawning < timer)
-    //    {
-    //        readyToSpawn = true;
-    //        timer = 0;
-    //    }
-
-    //    if (readyToSpawn && timer > timeBetweenSpawn)
-    //    {
-    //        timer = 0;
-    //        PhotonNetwork.Instantiate(_enemyPrefab.name, new Vector2(Random.Range(4, -4), Random.Range(4, -4)), Quaternion.identity);
-    //    }
-    //}
+   
     [SerializeField] private GameObject normalZombiePrefab;
     [SerializeField] private GameObject fastZombiePrefab;
     [SerializeField] private GameObject tankZombiePrefab;
@@ -72,7 +29,7 @@ public class EnemySpawn : MonoBehaviour
 
     private void Update()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {
             matchStarted = true;
 
@@ -116,7 +73,10 @@ public class EnemySpawn : MonoBehaviour
         {
             totalZombiesToSpawn = Mathf.CeilToInt(totalZombiesToSpawn * 1.2f);
         }
-
+        if (waveNumber % 2 == 0)
+        {
+            IncreaseZombieStats(0.05f); // Incremento del 5%
+        }
         // Calcula la cantidad exacta de cada tipo de zombie
         normalZombies = Mathf.FloorToInt(totalZombiesToSpawn * 0.45f);
         fastZombies = Mathf.FloorToInt(totalZombiesToSpawn * 0.35f);
@@ -124,7 +84,22 @@ public class EnemySpawn : MonoBehaviour
 
         Debug.Log($"Iniciando oleada {waveNumber} con {totalZombiesToSpawn} zombies: {normalZombies} normales, {fastZombies} rápidos, {tankZombies} tanques.");
     }
+    private void IncreaseZombieStats(float percentage)
+    {
+        // Accede a los ScriptableObjects y aumenta sus estadísticas
+        IncreaseStats(normalZombiePrefab.GetComponent<EnemyC>().zombieStats, percentage);
+        IncreaseStats(fastZombiePrefab.GetComponent<EnemyC>().zombieStats, percentage);
+        IncreaseStats(tankZombiePrefab.GetComponent<EnemyC>().zombieStats, percentage);
 
+        Debug.Log($"Estadísticas incrementadas en un {percentage * 100}% para todos los tipos de zombies.");
+    }
+    private void IncreaseStats(ZombieStatsSO stats, float percentage)
+    {
+        stats.speed += stats.speed * percentage;
+        stats.health = Mathf.CeilToInt(stats.health * (1 + percentage));
+        stats.damage = Mathf.CeilToInt(stats.damage * (1 + percentage));
+        stats.scoreValue = Mathf.CeilToInt(stats.scoreValue * (1 + percentage));
+    }
     private void EndWave()
     {
         waveActive = false;
