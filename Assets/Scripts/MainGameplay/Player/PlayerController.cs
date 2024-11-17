@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private PhotonView pv;
     private Camera _camera;
     private Animator _animator;
+    private float timerRunTheWave;
+    private bool hasTeleported = false;
 
     private void Awake()
     {
@@ -41,6 +43,21 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                timerRunTheWave += Time.deltaTime;
+
+                if (timerRunTheWave >= 10 && !hasTeleported)
+                {
+                    TeleportAllPlayers();
+                    hasTeleported = true;
+                    timerRunTheWave = 0;
+                }
+            }
+        }
     }
 
     private void Move()
@@ -68,5 +85,17 @@ public class PlayerController : MonoBehaviour
             direction = 2;
         }
         _animator.SetInteger("MovementDirection", direction);
+    }
+
+    private void TeleportAllPlayers()
+    {
+        Vector2 targetPosition = new Vector2(Random.Range(-4, 4), Random.Range(-4, 4));
+        pv.RPC("Teleport", RpcTarget.AllBuffered, targetPosition);
+    }
+
+    [PunRPC]
+    public void Teleport(Vector2 newPosition)
+    {
+        transform.position = newPosition;
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerSpawn : MonoBehaviour
 {
     [SerializeField] private GameObject _playerPrefab;
-    GameObject _player;
+    private GameObject _player;
     private PhotonView pv;
 
     private void Awake()
@@ -16,13 +16,11 @@ public class PlayerSpawn : MonoBehaviour
 
     private void Start()
     {
-        _player = PhotonNetwork.Instantiate(_playerPrefab.name, new Vector2(Random.Range(4, -4), Random.Range(4, -4)), Quaternion.identity);
-
-        //int playerIndex = PhotonNetwork.PlayerList.Length;
-
-        //pv.RPC("ChangeColor", RpcTarget.AllBuffered, _player.GetComponent<PhotonView>().ViewID, playerIndex);
+        // Instanciamos el jugador en una posición aleatoria
+        _player = PhotonNetwork.Instantiate(_playerPrefab.name, new Vector2(Random.Range(52, 58), Random.Range(11, 6)), Quaternion.identity);
     }
-
+    
+}
     //[PunRPC]
     //private void ChangeColor(int playerViewID, int playerIndex)
     //{
@@ -33,4 +31,3 @@ public class PlayerSpawn : MonoBehaviour
     //        targetPhotonView.gameObject.GetComponent<SpriteRenderer>().color = (playerIndex == 1) ? Color.red : Color.blue;
     //    }
     //}
-}
