@@ -30,7 +30,7 @@ public class Coins : MonoBehaviour
 
             if (playerPhotonView != null && playerPhotonView.IsMine)
             {
-                GameManager.instance.AddCoinToPool(coinValue);
+                StatsManager.instance.AddCoinToPool(coinValue);
             }
         }
     }
