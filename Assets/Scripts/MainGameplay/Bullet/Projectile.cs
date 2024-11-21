@@ -47,15 +47,7 @@ public class Projectile : MonoBehaviour, IProjectile
             Debug.Log("Daño!");
             PhotonNetwork.Destroy(gameObject);
         }
-        if (other.CompareTag("Enemy")) // Suponiendo que el enemigo tiene el tag "Enemy"
-        {
-            EnemyC enemy = other.GetComponent<EnemyC>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(15); // Inflige el daño
-                Destroy(gameObject); // Destruye el proyectil al impactar
-            }
-        }
+
     }
 
     public void SetOwner(IGuns guns) => _owner = guns;
