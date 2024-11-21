@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Photon.Pun;
 
 [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
 public class Projectile : MonoBehaviour, IProjectile
@@ -44,7 +45,7 @@ public class Projectile : MonoBehaviour, IProjectile
         if(((1<<other.gameObject.layer) & _hitteableLater) != 0)
         {
             Debug.Log("Daño!");
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 

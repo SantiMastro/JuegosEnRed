@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Pistol : Guns
 {
@@ -8,7 +9,9 @@ public class Pistol : Guns
     {
         if (Time.time > lastFire + FireDelay)
         {
-            Projectile projectile = Instantiate(Projectile, _firePoint.position, transform.rotation);
+            GameObject projectileObj = PhotonNetwork.Instantiate(Projectile.name, _firePoint.position, transform.rotation);
+            Projectile projectile = projectileObj.GetComponent<Projectile>();
+
             projectile.LaunchProjectile(transform.right);
             projectile.SetOwner(this);
 

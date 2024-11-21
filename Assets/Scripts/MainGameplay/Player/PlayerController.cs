@@ -109,19 +109,32 @@ public class PlayerController : MonoBehaviour
         {
             guns.gameObject.SetActive(false);
         }
+
         _gunsList[index].gameObject.SetActive(true);
         _guns = _gunsList[index];
+
+        pv.RPC("Switch", RpcTarget.AllBuffered, index);
     }
 
     private void TeleportAllPlayers()
     {
-        Vector2 targetPosition = new Vector2(Random.Range(-4, 4), Random.Range(-4, 4));
-        pv.RPC("Teleport", RpcTarget.AllBuffered, targetPosition);
+         Vector2 targetPosition = new Vector2(Random.Range(-4, 4), Random.Range(-4, 4));
+         pv.RPC("Teleport", RpcTarget.AllBuffered, targetPosition);
     }
 
     [PunRPC]
     public void Teleport(Vector2 newPosition)
     {
         transform.position = newPosition;
+    }
+    [PunRPC]
+    public void Switch(int index)
+    {
+        foreach (Guns guns in _gunsList)
+        {
+            guns.gameObject.SetActive(false);
+        }
+        _gunsList[index].gameObject.SetActive(true);
+        _guns = _gunsList[index];
     }
 }
