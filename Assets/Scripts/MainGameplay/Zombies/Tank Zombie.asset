@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7204d13db74f1a45b1f4578570e606b, type: 3}
+  m_Name: Tank Zombie
+  m_EditorClassIdentifier: 
+  speed: 2.5
+  health: 250
+  damage: 20
+  scoreValue: 100
+  dropChance: 0.7
+  healthDropChance: 0.5
+  healthDropPrefab: {fileID: 8009326964329973202, guid: 30651717385c8f64ca8931214395b47f, type: 3}
+  ammoDropPrefab: {fileID: 3815181737532198403, guid: 3afd6fda2598c8b4e9b263e1f8bc362f, type: 3}

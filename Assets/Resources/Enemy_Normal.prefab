@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8270868992054371985}
   - component: {fileID: 3235755842525117373}
   - component: {fileID: 3989178542799410667}
+  - component: {fileID: 1726580485919167431}
   m_Layer: 3
   m_Name: Enemy_Normal
   m_TagString: Untagged
@@ -229,7 +230,7 @@ MonoBehaviour:
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     InterpolateOption: 1
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
@@ -238,3 +239,21 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &1726580485919167431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6964739418415742041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11038559912e13448b6bd3b981fc7702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombieStats: {fileID: 11400000, guid: 1f9a1d93d6c3ae046b13a359881073b0, type: 2}
+  currentHealth: 0
+  obstacleDetectionDistance: 1
+  obstacleDetectorWidth: 1
+  obstacleDetectorHeight: 1
+  obstacleAvoidanceForce: 10

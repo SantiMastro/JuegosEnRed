@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1524676376699022365}
   - component: {fileID: 1170429823767509413}
   - component: {fileID: 7511920320684726629}
+  - component: {fileID: 7082638379539800347}
   m_Layer: 3
   m_Name: Enemy_Fast
   m_TagString: Untagged
@@ -229,7 +230,7 @@ MonoBehaviour:
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     InterpolateOption: 1
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
@@ -238,3 +239,21 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &7082638379539800347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5647253935529803240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11038559912e13448b6bd3b981fc7702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombieStats: {fileID: 11400000, guid: 5c76912e6a3b5474a99d7b34dd56db1e, type: 2}
+  currentHealth: 0
+  obstacleDetectionDistance: 1
+  obstacleDetectorWidth: 1
+  obstacleDetectorHeight: 1
+  obstacleAvoidanceForce: 10
