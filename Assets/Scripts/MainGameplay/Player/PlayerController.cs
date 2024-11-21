@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private Animator _animator;
     private float timerRunTheWave;
     private bool hasTeleported = false;
-    [SerializeField] private bool isDead = false;
+    [SerializeField] public bool isDead { get; private set; }
 
     private void Awake()
     {
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     IEnumerator respawn()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(20);
         _currentHealth = 20;
         StatsManager.instance.UpdateHealth(_currentHealth, _maxHealth);
 
