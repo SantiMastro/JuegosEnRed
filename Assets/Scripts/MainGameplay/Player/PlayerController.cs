@@ -8,17 +8,21 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private int _speed = 5;
     [SerializeField] TMPro.TextMeshPro _nicknamePlayer;
+    [SerializeField] private IGuns _guns;
+    [SerializeField] List<Guns> _gunsList;
     private PhotonView pv;
     private Camera _camera;
     private Animator _animator;
     private float timerRunTheWave;
     private bool hasTeleported = false;
+    
 
     private void Awake()
     {
         pv = GetComponent<PhotonView>();
         _camera = GetComponentInChildren<Camera>();
         _animator = GetComponent<Animator>();
+        _guns = _gunsList[0];
 
         if (pv.IsMine)
         {
@@ -84,7 +88,29 @@ public class PlayerController : MonoBehaviour
             transform.position += Vector3.right * _speed * Time.deltaTime;
             direction = 2;
         }
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            _guns.Shoot();
+        }
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            SwitchGuns(0);
+        }
+        if (Input.GetKey(KeyCode.Alpha2))
+        {
+            SwitchGuns(1);
+        }
         _animator.SetInteger("MovementDirection", direction);
+    }
+
+    private void SwitchGuns(int index)
+    {
+        foreach (Guns guns in _gunsList)
+        {
+            guns.gameObject.SetActive(false);
+        }
+        _gunsList[index].gameObject.SetActive(true);
+        _guns = _gunsList[index];
     }
 
     private void TeleportAllPlayers()
