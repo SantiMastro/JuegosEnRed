@@ -50,6 +50,10 @@ public class Projectile : MonoBehaviour, IProjectile
 
             PhotonNetwork.Destroy(gameObject);
         }
+        if (other.gameObject.layer == 6)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 
     [PunRPC]

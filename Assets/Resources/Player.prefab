@@ -905,8 +905,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 6
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -995,6 +995,7 @@ MonoBehaviour:
   - {fileID: 5696758903532608316}
   - {fileID: 7826901040380788953}
   _currentHealth: 0
+  isDead: 0
 --- !u!114 &99398872718251063
 MonoBehaviour:
   m_ObjectHideFlags: 0
