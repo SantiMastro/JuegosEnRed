@@ -105638,8 +105638,10 @@ MonoBehaviour:
   totalPistolAmmo: 30
   totalShotgunAmmo: 0
   totalUziAmmo: 0
+  totalHighScore: 0
   healthBarFill: {fileID: 274268867}
   currentLifePlayer: 0
+  highScoreText: {fileID: 242015652}
   coinsText: {fileID: 1753509985}
   pistolText: {fileID: 1972258892}
   shotgunText: {fileID: 756212392}

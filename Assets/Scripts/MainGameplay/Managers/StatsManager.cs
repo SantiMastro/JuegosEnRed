@@ -12,11 +12,13 @@ public class StatsManager : MonoBehaviour
     [SerializeField] public int totalPistolAmmo = 0;
     [SerializeField] public int totalShotgunAmmo = 0;
     [SerializeField] public int totalUziAmmo = 0;
+    [SerializeField] public int totalHighScore = 0;
     [SerializeField] public Image healthBarFill;
     public int currentLifePlayer;
 
     public static StatsManager instance;
 
+    public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI pistolText;
     public TextMeshProUGUI shotgunText;
@@ -58,6 +60,12 @@ public class StatsManager : MonoBehaviour
         UpdateText();
         Debug.Log("Total UZI_AMMO is: " + totalUziAmmo);
     }
+    public void AddHighScoreToPool(int highScoreValue)
+    {
+        totalHighScore += highScoreValue;
+        UpdateText();
+        Debug.Log("Total HIGH_SCORE is: " + highScoreValue);
+    }
 
     public void UpdateText()
     {
@@ -76,6 +84,10 @@ public class StatsManager : MonoBehaviour
         if (uziText != null)
         {
             uziText.text = totalUziAmmo.ToString();
+        }
+        if (highScoreText != null)
+        {
+            highScoreText.text = totalHighScore.ToString();
         }
     }
 

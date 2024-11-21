@@ -76,9 +76,9 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void Die()
     {
         Debug.Log($"{gameObject.name} ha muerto.");
-
         // Destruye el objeto localmente y en red si estás usando Photon
         Photon.Pun.PhotonNetwork.Destroy(gameObject);
+        StatsManager.instance.AddHighScoreToPool(zombieStats.scoreValue);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
