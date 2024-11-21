@@ -38,7 +38,7 @@ public class EnemySpawn : MonoBehaviour
 
     private void Update()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount >= 1)
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
         {
             matchStarted = true;
             if (countIsComplete == false)

@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             Move();
         }
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount >= 1)
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
         {
             if (PhotonNetwork.IsMasterClient)
             {
@@ -126,13 +126,16 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        _currentHealth -= damage;
-        Debug.Log($"{_currentHealth} + {name}");
-        StatsManager.instance.UpdateHealth(_currentHealth, _maxHealth);
-
-        if (_currentHealth <= 0)
+        if (pv.IsMine)
         {
-            Die();
+            _currentHealth -= damage;
+            Debug.Log($"{_currentHealth} + {name}");
+            StatsManager.instance.UpdateHealth(_currentHealth, _maxHealth);
+
+            if (_currentHealth <= 0)
+            {
+                Die();
+            }
         }
     }
 
