@@ -9,7 +9,7 @@ public class Shotgun : Guns
 
     public override void Shoot()
     {
-        if (Time.time > lastFire + FireDelay)
+        if (StatsManager.instance.totalShotgunAmmo > 0 && Time.time > lastFire + FireDelay)
         {
             for (int i = 0; i < _bulletPerShell; i++)
             {
@@ -21,6 +21,11 @@ public class Shotgun : Guns
 
                 lastFire = Time.time;
             }
+            StatsManager.instance.AddShotgunAmmoToPool(-1);
+        }
+        else
+        {
+            Debug.Log("No hay balas");
         }
     }
 }

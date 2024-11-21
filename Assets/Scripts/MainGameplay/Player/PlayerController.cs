@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TMPro.TextMeshPro _nicknamePlayer;
     [SerializeField] private IGuns _guns;
     [SerializeField] List<Guns> _gunsList;
+
     private PhotonView pv;
     private Camera _camera;
     private Animator _animator;
