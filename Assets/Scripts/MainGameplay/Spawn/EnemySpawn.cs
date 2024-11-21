@@ -107,9 +107,9 @@ public class EnemySpawn : MonoBehaviour
     private void IncreaseZombieStats(float percentage)
     {
         // Accede a los ScriptableObjects y aumenta sus estadísticas
-        IncreaseStats(normalZombiePrefab.GetComponent<EnemyC>().zombieStats, percentage);
-        IncreaseStats(fastZombiePrefab.GetComponent<EnemyC>().zombieStats, percentage);
-        IncreaseStats(tankZombiePrefab.GetComponent<EnemyC>().zombieStats, percentage);
+        IncreaseStats(normalZombiePrefab.GetComponent<EnemyController>().zombieStats, percentage);
+        IncreaseStats(fastZombiePrefab.GetComponent<EnemyController>().zombieStats, percentage);
+        IncreaseStats(tankZombiePrefab.GetComponent<EnemyController>().zombieStats, percentage);
 
         Debug.Log($"Estadísticas incrementadas en un {percentage * 100}% para todos los tipos de zombies.");
     }

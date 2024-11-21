@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour, IProjectile
     {
         if(((1<<other.gameObject.layer) & _hitteableLater) != 0)
         {
-            Debug.Log("Daño!");
+            other.GetComponent<EnemyController>()?.TakeDamage(_owner.Damage);
             PhotonNetwork.Destroy(gameObject);
         }
     }

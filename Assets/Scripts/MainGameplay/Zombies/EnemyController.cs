@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyC : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamageable
 {
+    public int MaxHealt => zombieStats.health;
+    public int CurrentHealth => currentHealth;
+
     [Header("Zombie Settings")]
     public ZombieStatsSO zombieStats;
 
@@ -15,8 +18,7 @@ public class EnemyC : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        // Inicializa la vida del zombie con el valor del ScriptableObject
-        currentHealth = zombieStats.health;
+        currentHealth = MaxHealt;
     }
 
     private void Update()
@@ -56,27 +58,24 @@ public class EnemyC : MonoBehaviour
 
         // Mueve al zombie hacia el jugador
         rb.MovePosition(rb.position + direction * zombieStats.speed * Time.deltaTime);
-
     }
-   
-   
+
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        Debug.Log($"{currentHealth} + {name}");
 
-        // Si la vida llega a 0, el zombie muere
         if (currentHealth <= 0)
         {
             Die();
         }
     }
 
-    private void Die()
+    public void Die()
     {
         Debug.Log($"{gameObject.name} ha muerto.");
 
         // Destruye el objeto localmente y en red si estás usando Photon
         Photon.Pun.PhotonNetwork.Destroy(gameObject);
     }
-
 }
