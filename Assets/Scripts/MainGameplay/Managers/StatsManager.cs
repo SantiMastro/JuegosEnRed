@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using UnityEngine.UI;
 using Unity.VisualScripting;
 
 public class StatsManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class StatsManager : MonoBehaviour
     [SerializeField] public int totalPistolAmmo = 0;
     [SerializeField] public int totalShotgunAmmo = 0;
     [SerializeField] public int totalUziAmmo = 0;
+    [SerializeField] public Image healthBarFill;
+    public int currentLifePlayer;
 
     public static StatsManager instance;
 
@@ -76,4 +79,9 @@ public class StatsManager : MonoBehaviour
         }
     }
 
+    public void UpdateHealth(int currentHealth, int maxHealth)
+    {
+        float healthPercentage = (float)currentHealth / maxHealth;
+        healthBarFill.fillAmount = healthPercentage;
+    }
 }

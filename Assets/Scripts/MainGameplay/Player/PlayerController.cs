@@ -4,19 +4,23 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
+    public int MaxHealt => _maxHealth;
+    public int CurrentHealth => _currentHealth;
+
+    [SerializeField] private int _maxHealth = 100;
     [SerializeField] private int _speed = 5;
     [SerializeField] TMPro.TextMeshPro _nicknamePlayer;
     [SerializeField] private IGuns _guns;
     [SerializeField] List<Guns> _gunsList;
 
+    public int _currentHealth;
     private PhotonView pv;
     private Camera _camera;
     private Animator _animator;
     private float timerRunTheWave;
     private bool hasTeleported = false;
-    
 
     private void Awake()
     {
@@ -39,11 +43,14 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        _currentHealth = MaxHealt;
         _camera.gameObject.SetActive(pv.IsMine);
     }
 
     private void Update()
     {
+        Debug.Log(_currentHealth + name);
+
         if (pv.IsMine)
         {
             Move();
@@ -115,6 +122,23 @@ public class PlayerController : MonoBehaviour
         _guns = _gunsList[index];
 
         pv.RPC("Switch", RpcTarget.AllBuffered, index);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _currentHealth -= damage;
+        Debug.Log($"{_currentHealth} + {name}");
+        StatsManager.instance.UpdateHealth(_currentHealth, _maxHealth);
+
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        _animator.SetBool("IsDead", true);
     }
 
     private void TeleportAllPlayers()

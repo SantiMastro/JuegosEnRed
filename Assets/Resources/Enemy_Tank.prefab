@@ -252,4 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombieStats: {fileID: 11400000, guid: 66855f66be2e252439e7c5e9e1c01b4b, type: 2}
+  _hitteableLater:
+    serializedVersion: 2
+    m_Bits: 256
   currentHealth: 0

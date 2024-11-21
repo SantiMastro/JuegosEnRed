@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     [Header("Zombie Settings")]
     public ZombieStatsSO zombieStats;
+    [SerializeField] private LayerMask _hitteableLater;
 
     private Transform closestPlayerTransform; // Referencia al jugador más cercano
     private Rigidbody2D rb;
@@ -77,5 +79,17 @@ public class EnemyController : MonoBehaviour, IDamageable
 
         // Destruye el objeto localmente y en red si estás usando Photon
         Photon.Pun.PhotonNetwork.Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (((1 << collision.gameObject.layer) & _hitteableLater) != 0)
+        {
+            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.TakeDamage(zombieStats.damage);
+            }
+        }
     }
 }

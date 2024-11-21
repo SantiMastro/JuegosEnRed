@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3521734026214161729}
   - component: {fileID: 3894816414942290090}
   - component: {fileID: 7826901040380788953}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8072341018881660723}
   - component: {fileID: 3978019865927286198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BarNick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 7157223841091401353}
   - component: {fileID: 7534169757359573367}
   - component: {fileID: 8128686365320081468}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NickName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,7 +428,7 @@ GameObject:
   - component: {fileID: 2810553822770683594}
   - component: {fileID: 2208033933997667770}
   - component: {fileID: 2333045907525239980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 3774784040658974582}
   - component: {fileID: 8446235770035982658}
   - component: {fileID: 5696758903532608316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,7 +678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 162022317801893977}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePointShoot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -709,7 +709,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3747977747612154801}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePointShoot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 6762662362408198725}
   - component: {fileID: 6966998058888463322}
   - component: {fileID: 99398872718251063}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -988,11 +988,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a09e37208d097d458c426bbb1efe769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 100
   _speed: 5
   _nicknamePlayer: {fileID: 8128686365320081468}
   _gunsList:
   - {fileID: 5696758903532608316}
   - {fileID: 7826901040380788953}
+  _currentHealth: 0
 --- !u!114 &99398872718251063
 MonoBehaviour:
   m_ObjectHideFlags: 0
