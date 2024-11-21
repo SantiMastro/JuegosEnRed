@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ShotgunStats
   m_EditorClassIdentifier: 
   <ProjectilePrefab>k__BackingField: {fileID: 2804618069480893751, guid: 363e738127877e2418150afa8c5b1105, type: 3}
-  <Damage>k__BackingField: 3
+  <Damage>k__BackingField: 30
   <FireDelay>k__BackingField: 2

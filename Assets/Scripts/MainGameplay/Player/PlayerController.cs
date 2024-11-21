@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             Move();
         }
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount >= 1)
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
         {
             if (PhotonNetwork.IsMasterClient)
             {
@@ -144,10 +144,9 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (pv.IsMine)
         {
-            isDead = true;
-            DisabledPlayer();
             StartCoroutine(respawn());
         }
+        pv.RPC("SetPlayerState", RpcTarget.AllBuffered, true);
     }
 
     IEnumerator respawn()
@@ -155,7 +154,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(5);
         _currentHealth = 20;
         StatsManager.instance.UpdateHealth(_currentHealth, _maxHealth);
-        EnabledPlayer();
+
+        pv.RPC("SetPlayerState", RpcTarget.AllBuffered, false);
     }
 
     private void TeleportAllPlayers()
@@ -164,30 +164,33 @@ public class PlayerController : MonoBehaviour, IDamageable
         pv.RPC("Teleport", RpcTarget.AllBuffered, targetPosition);
     }
 
-    private void DisabledPlayer()
+    [PunRPC]
+    public void SetPlayerState(bool isDeadState)
     {
-        _speed = 0;
-        var collider = pv.GetComponent<Collider2D>();
-        if (collider != null)
+        if (isDeadState)
         {
-            collider.enabled = false;
+            gameObject.tag = "Untagged";
+            isDead = true;
+            _speed = 0;
+            var collider = pv.GetComponent<Collider2D>();
+            if (collider != null)
+            {
+                collider.enabled = false;
+            }
+            _animator.SetBool("IsDead", true);
         }
-        gameObject.tag = "Untagged";
-
-        _animator.SetBool("IsDead", true);
-    }
-    private void EnabledPlayer()
-    {
-        isDead = false;
-        _speed = 5;
-        var collider = pv.GetComponent<Collider2D>();
-        if (collider != null)
+        else
         {
-            collider.enabled = true;
+            gameObject.tag = "Player";
+            isDead = false;
+            _speed = 5;
+            var collider = pv.GetComponent<Collider2D>();
+            if (collider != null)
+            {
+                collider.enabled = true;
+            }
+            _animator.SetBool("IsDead", false);
         }
-        gameObject.tag = "Player";
-
-        _animator.SetBool("IsDead", false);
     }
 
     [PunRPC]
