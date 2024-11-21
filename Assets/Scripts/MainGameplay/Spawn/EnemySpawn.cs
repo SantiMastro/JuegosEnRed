@@ -12,10 +12,7 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private GameObject textGameStart;
     [SerializeField] private GameObject waitingPlayers;
     [SerializeField] private Transform[] spawnPoints; // Array de spawn points
-    [SerializeField] private float obstaclecCheckcircleradiuous;
-    [SerializeField] private float obstaclecheckdist;
-    [SerializeField] private LayerMask obstaclecLayerMask;
-    private RaycastHit2D[] obscol;
+    
 
     [SerializeField] private float timeToStartSpawning = 5f;
     [SerializeField] private float timeBetweenSpawn = 1f;
@@ -29,10 +26,7 @@ public class EnemySpawn : MonoBehaviour
     private bool waveActive = false;
     private float timer;
     private bool matchStarted = false;
-    private void Awake()
-    {
-        obscol = new RaycastHit2D[10];
-    }
+    
     private void Start()
     {
         timer = 0;
