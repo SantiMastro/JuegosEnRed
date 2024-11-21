@@ -26,14 +26,14 @@ public class EnemySpawn : MonoBehaviour
     private bool waveActive = false;
     private float timer;
     private bool matchStarted = false;
-    private float text = 0;
+    private bool countIsComplete = false;
     
     private void Start()
     {
         timer = 0;
+        countIsComplete = false;
         waitingPlayers.SetActive(true);
         textGameStart.SetActive(false);
-        text = 0;
     }
 
     private void Update()
@@ -41,24 +41,25 @@ public class EnemySpawn : MonoBehaviour
         if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
         {
             matchStarted = true;
-            waitingPlayers.SetActive(false);
-            textGameStart.SetActive(true);
+            if (countIsComplete == false)
+            {
+                waitingPlayers.SetActive(false);
+                textGameStart.SetActive(true);
+            }
 
+            timer += Time.deltaTime;
+
+            if (timer >= timeToStartSpawning && countIsComplete == false)
+            {
+                textGameStart.SetActive(false);
+                countIsComplete = true;
+            }
 
             if (PhotonNetwork.IsMasterClient)
             {
-                timer += Time.deltaTime;
-                text += Time.deltaTime;
-                if(text >= timeToStartSpawning)
-                {
-                    textGameStart.SetActive(false);
-
-                }
-
                 // Comienza una nueva oleada después del tiempo de espera
                 if (!waveActive && timer >= timeToStartSpawning)
                 {
-                   
                     StartNewWave();
                 }
 

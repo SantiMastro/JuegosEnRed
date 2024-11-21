@@ -47,7 +47,6 @@ public class Projectile : MonoBehaviour, IProjectile
             Debug.Log("Daño!");
             PhotonNetwork.Destroy(gameObject);
         }
-
     }
 
     public void SetOwner(IGuns guns) => _owner = guns;

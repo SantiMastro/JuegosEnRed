@@ -253,7 +253,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieStats: {fileID: 11400000, guid: 66855f66be2e252439e7c5e9e1c01b4b, type: 2}
   currentHealth: 0
-  obstacleDetectionDistance: 1
-  obstacleDetectorWidth: 1
-  obstacleDetectorHeight: 1
-  obstacleAvoidanceForce: 10
