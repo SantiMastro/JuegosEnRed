@@ -17,11 +17,13 @@ public class Projectile : MonoBehaviour, IProjectile
     [SerializeField] protected LayerMask _hitteableLater;
     [SerializeField] protected IGuns _owner;
 
+    private PhotonView _pv;
     private Rigidbody2D _projectileRb;
     private Collider2D _collider;
 
     private void Awake()
     {
+        _pv = GetComponent<PhotonView>();
         _projectileRb = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
         Init();
@@ -42,10 +44,25 @@ public class Projectile : MonoBehaviour, IProjectile
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(((1<<other.gameObject.layer) & _hitteableLater) != 0)
+        if (((1 << other.gameObject.layer) & _hitteableLater) != 0)
         {
-            other.GetComponent<EnemyController>()?.TakeDamage(_owner.Damage);
+            _pv.RPC("ApplyDamageToEnemy", RpcTarget.AllBuffered, other.gameObject.GetPhotonView().ViewID, _owner.Damage);
+
             PhotonNetwork.Destroy(gameObject);
+        }
+    }
+
+    [PunRPC]
+    public void ApplyDamageToEnemy(int enemyPhotonViewID, int damage)
+    {
+        PhotonView enemyPhotonView = PhotonView.Find(enemyPhotonViewID);
+        if (enemyPhotonView != null)
+        {
+            EnemyController enemyController = enemyPhotonView.GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+                enemyController.TakeDamage(damage);
+            }
         }
     }
 
