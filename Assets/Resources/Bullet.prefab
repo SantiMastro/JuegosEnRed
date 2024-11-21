@@ -233,4 +233,4 @@ MonoBehaviour:
   _lifeTime: 4
   _hitteableLater:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
