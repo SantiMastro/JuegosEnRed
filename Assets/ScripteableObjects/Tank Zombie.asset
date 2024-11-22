@@ -16,7 +16,7 @@ MonoBehaviour:
   health: 250
   damage: 20
   scoreValue: 100
-  dropChance: 1
+  dropChance: 0.8
   goldCoinDropChance: 0.1
   silverCoinDropChance: 0.1
   bronzeCoinDropChance: 0.1
