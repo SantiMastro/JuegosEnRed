@@ -5,14 +5,15 @@ using Photon.Pun;
 
 public class EnemySpawn : MonoBehaviour
 {
-    
+
     [SerializeField] private GameObject normalZombiePrefab;
     [SerializeField] private GameObject fastZombiePrefab;
     [SerializeField] private GameObject tankZombiePrefab;
     [SerializeField] private GameObject textGameStart;
     [SerializeField] private GameObject waitingPlayers;
+    [SerializeField] private GameObject shop;
     [SerializeField] private Transform[] spawnPoints; // Array de spawn points
-    
+
 
     [SerializeField] private float timeToStartSpawning = 5f;
     [SerializeField] private float timeBetweenSpawn = 1f;
@@ -27,13 +28,17 @@ public class EnemySpawn : MonoBehaviour
     private float timer;
     private bool matchStarted = false;
     private bool countIsComplete = false;
-    
+
+    private PhotonView photonView;
+
     private void Start()
     {
         timer = 0;
         countIsComplete = false;
         waitingPlayers.SetActive(true);
         textGameStart.SetActive(false);
+
+        photonView = GetComponent<PhotonView>();
     }
 
     private void Update()
@@ -57,20 +62,17 @@ public class EnemySpawn : MonoBehaviour
 
             if (PhotonNetwork.IsMasterClient)
             {
-                // Comienza una nueva oleada después del tiempo de espera
                 if (!waveActive && timer >= timeToStartSpawning)
                 {
                     StartNewWave();
                 }
 
-                // Spawnea zombies hasta alcanzar el total de la oleada
                 if (waveActive && timer >= timeBetweenSpawn && zombiesSpawned < totalZombiesToSpawn)
                 {
                     SpawnZombie();
                     timer = 0;
                 }
-                
-                // Termina la oleada solo si se han spawneado todos los zombies y ya no hay ninguno activo
+
                 if (zombiesSpawned >= totalZombiesToSpawn && GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && waveActive)
                 {
                     EndWave();
@@ -87,6 +89,11 @@ public class EnemySpawn : MonoBehaviour
     {
         waveActive = true;
         zombiesSpawned = 0;
+
+        if (PhotonNetwork.IsMasterClient && waveNumber > 1)
+        {
+            photonView.RPC("SetShopActive", RpcTarget.AllBuffered, false);
+        }
 
         // Aumenta el total de zombies en un 20% respecto a la oleada anterior
         if (waveNumber > 1)
@@ -125,6 +132,12 @@ public class EnemySpawn : MonoBehaviour
         waveActive = false;
         waveNumber++;
         timer = -timeBetweenWaves; // Espera entre oleadas
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC("SetShopActive", RpcTarget.All, true);
+        }
+
         Debug.Log($"Oleada {waveNumber} completada.");
     }
 
@@ -154,5 +167,11 @@ public class EnemySpawn : MonoBehaviour
             PhotonNetwork.Instantiate(zombieToSpawn.name, spawnPoint.position, Quaternion.identity);
             zombiesSpawned++;
         }
+    }
+
+    [PunRPC]
+    public void SetShopActive(bool isActive)
+    {
+        shop.SetActive(isActive);
     }
 }

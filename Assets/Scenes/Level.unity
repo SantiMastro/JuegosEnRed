@@ -108091,6 +108091,7 @@ GameObject:
   - component: {fileID: 1663884504}
   - component: {fileID: 1663884503}
   - component: {fileID: 1663884505}
+  - component: {fileID: 1663884506}
   m_Layer: 0
   m_Name: Enemy_Spawn
   m_TagString: Untagged
@@ -108115,6 +108116,7 @@ MonoBehaviour:
   tankZombiePrefab: {fileID: 5778511570450183752, guid: 3d57d35d028bb324c9eb4a30c0a63e56, type: 3}
   textGameStart: {fileID: 1376837184}
   waitingPlayers: {fileID: 873821753}
+  shop: {fileID: 992107452}
   spawnPoints:
   - {fileID: 1257187191}
   - {fileID: 1542282639}
@@ -108164,6 +108166,28 @@ MonoBehaviour:
   FastSO: {fileID: 11400000, guid: 5c76912e6a3b5474a99d7b34dd56db1e, type: 2}
   TankSO: {fileID: 11400000, guid: 66855f66be2e252439e7c5e9e1c01b4b, type: 2}
   NormalSO: {fileID: 11400000, guid: 1f9a1d93d6c3ae046b13a359881073b0, type: 2}
+--- !u!114 &1663884506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663884502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 13
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1676164485
 GameObject:
   m_ObjectHideFlags: 0
@@ -115830,8 +115854,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1033797302}
   - {fileID: 364876720}
-  - {fileID: 1682475561}
-  - {fileID: 1663884504}
   - {fileID: 676163702}
   - {fileID: 7826670424761062828}
   - {fileID: 5148830612366946368}
@@ -115848,4 +115870,6 @@ SceneRoots:
   - {fileID: 228625911}
   - {fileID: 1505380440}
   - {fileID: 2049870070}
+  - {fileID: 1663884504}
+  - {fileID: 1682475561}
   - {fileID: 866986293}
