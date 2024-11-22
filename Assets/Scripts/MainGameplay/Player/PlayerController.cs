@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             Move();
         }
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {
             if (PhotonNetwork.IsMasterClient)
             {

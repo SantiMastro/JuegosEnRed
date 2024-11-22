@@ -12,11 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7204d13db74f1a45b1f4578570e606b, type: 3}
   m_Name: Fast Zombie
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 10
   health: 100
   damage: 10
   scoreValue: 75
-  dropChance: 0.35
-  healthDropChance: 0.9
-  healthDropPrefab: {fileID: 7152321909436966293, guid: 73a2ad574387ef648999670d92a1dd31, type: 3}
-  ammoDropPrefab: {fileID: 3660277025602922886, guid: 82ce37636ca820841a7de38c962e56d2, type: 3}
+  dropChance: 1
+  goldCoinDropChance: 0.1
+  silverCoinDropChance: 0.1
+  bronzeCoinDropChance: 0.1
+  pistolAmmoDropChance: 0.3
+  uziAmmoDropChance: 0.2
+  shotgunAmmoDropChance: 0.2
+  goldCoinPrefab: {fileID: 7152321909436966293, guid: 73a2ad574387ef648999670d92a1dd31, type: 3}
+  silverCoinPrefab: {fileID: 5993365818816605704, guid: ad25486093814df42bee7a5e2a03d0d5, type: 3}
+  bronzeCoinPrefab: {fileID: 8009326964329973202, guid: 30651717385c8f64ca8931214395b47f, type: 3}
+  pistolAmmoPrefab: {fileID: 3815181737532198403, guid: 3afd6fda2598c8b4e9b263e1f8bc362f, type: 3}
+  uziAmmoPrefab: {fileID: 4399872643541212004, guid: d6b7a52d9fe851d42ac505af49079fb6, type: 3}
+  shotgunAmmoPrefab: {fileID: 3660277025602922886, guid: 82ce37636ca820841a7de38c962e56d2, type: 3}

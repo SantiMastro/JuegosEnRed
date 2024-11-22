@@ -12,23 +12,20 @@ public class EnemyController : MonoBehaviour, IDamageable
     public ZombieStatsSO zombieStats;
     [SerializeField] private LayerMask _hitteableLater;
 
-    private Transform closestPlayerTransform; // Referencia al jugador más cercano
+    private Transform closestPlayerTransform;
     private Rigidbody2D rb;
     public int currentHealth;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
         currentHealth = MaxHealt;
     }
 
     private void Update()
     {
-        // Encuentra el jugador más cercano
         FindClosestPlayer();
 
-        // Si hay un jugador cercano, síguelo
         if (closestPlayerTransform != null)
         {
             FollowPlayer();
@@ -55,10 +52,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void FollowPlayer()
     {
-        // Calcula la dirección hacia el jugador más cercano
         Vector2 direction = (closestPlayerTransform.position - transform.position).normalized;
-
-        // Mueve al zombie hacia el jugador
         rb.MovePosition(rb.position + direction * zombieStats.speed * Time.deltaTime);
     }
 
@@ -76,9 +70,51 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void Die()
     {
         Debug.Log($"{gameObject.name} ha muerto.");
-        // Destruye el objeto localmente y en red si estás usando Photon
+
+        if (Random.Range(0f, 1f) <= zombieStats.dropChance)
+        {
+            DropItem();
+        }
+
         Photon.Pun.PhotonNetwork.Destroy(gameObject);
         StatsManager.instance.AddHighScoreToPool(zombieStats.scoreValue);
+    }
+
+    private void DropItem()
+    {
+        float dropRoll = Random.Range(0f, 1f);
+
+        float dropChance = zombieStats.goldCoinDropChance + zombieStats.silverCoinDropChance + zombieStats.bronzeCoinDropChance + zombieStats.pistolAmmoDropChance + zombieStats.uziAmmoDropChance + zombieStats.shotgunAmmoDropChance;
+
+        if (dropRoll <= dropChance)
+        {
+            float dropTypeRoll = Random.Range(0f, 1f);
+
+            if (dropTypeRoll <= zombieStats.goldCoinDropChance)
+            {
+                PhotonNetwork.Instantiate(zombieStats.goldCoinPrefab.name, transform.position, Quaternion.identity);
+            }
+            else if (dropTypeRoll <= zombieStats.goldCoinDropChance + zombieStats.silverCoinDropChance)
+            {
+                PhotonNetwork.Instantiate(zombieStats.silverCoinPrefab.name, transform.position, Quaternion.identity);
+            }
+            else if (dropTypeRoll <= zombieStats.goldCoinDropChance + zombieStats.silverCoinDropChance + zombieStats.bronzeCoinDropChance)
+            {
+                PhotonNetwork.Instantiate(zombieStats.bronzeCoinPrefab.name, transform.position, Quaternion.identity);
+            }
+            else if (dropTypeRoll <= zombieStats.goldCoinDropChance + zombieStats.silverCoinDropChance + zombieStats.bronzeCoinDropChance + zombieStats.pistolAmmoDropChance)
+            {
+                PhotonNetwork.Instantiate(zombieStats.pistolAmmoPrefab.name, transform.position, Quaternion.identity);
+            }
+            else if (dropTypeRoll <= zombieStats.goldCoinDropChance + zombieStats.silverCoinDropChance + zombieStats.bronzeCoinDropChance + zombieStats.pistolAmmoDropChance + zombieStats.uziAmmoDropChance)
+            {
+                PhotonNetwork.Instantiate(zombieStats.uziAmmoPrefab.name, transform.position, Quaternion.identity);
+            }
+            else if (dropTypeRoll <= zombieStats.goldCoinDropChance + zombieStats.silverCoinDropChance + zombieStats.bronzeCoinDropChance + zombieStats.pistolAmmoDropChance + zombieStats.uziAmmoDropChance + zombieStats.shotgunAmmoDropChance)
+            {
+                PhotonNetwork.Instantiate(zombieStats.shotgunAmmoPrefab.name, transform.position, Quaternion.identity);
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -33,7 +33,6 @@ public class DeathManager : MonoBehaviour
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();
         SceneManager.LoadScene("MainMenu");
-        
     }
 
     private void Update()
