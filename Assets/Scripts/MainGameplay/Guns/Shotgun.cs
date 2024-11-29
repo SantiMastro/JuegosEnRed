@@ -23,9 +23,5 @@ public class Shotgun : Guns
             }
             StatsManager.instance.AddShotgunAmmoToPool(-1);
         }
-        else
-        {
-            Debug.Log("No hay balas");
-        }
     }
 }

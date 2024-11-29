@@ -18,9 +18,5 @@ public class Pistol : Guns
             lastFire = Time.time;
             StatsManager.instance.AddPistolAmmoToPool(-1);
         }
-        else
-        {
-            Debug.Log("No hay balas");
-        }
     }
 }

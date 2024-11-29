@@ -44,12 +44,14 @@ public class Projectile : MonoBehaviour, IProjectile
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (((1 << other.gameObject.layer) & _hitteableLater) != 0)
+        PhotonView targetPhotonView = other.gameObject.GetPhotonView();
+        if (targetPhotonView != null && ((1 << other.gameObject.layer) & _hitteableLater) != 0)
         {
-            _pv.RPC("ApplyDamageToEnemy", RpcTarget.AllBuffered, other.gameObject.GetPhotonView().ViewID, _owner.Damage);
+            _pv.RPC("ApplyDamageToEnemy", RpcTarget.AllBuffered, targetPhotonView.ViewID, _owner != null ? _owner.Damage : 0);
 
             PhotonNetwork.Destroy(gameObject);
         }
+
         if (other.gameObject.layer == 6)
         {
             PhotonNetwork.Destroy(gameObject);
@@ -67,6 +69,14 @@ public class Projectile : MonoBehaviour, IProjectile
             {
                 enemyController.TakeDamage(damage);
             }
+            else
+            {
+                Debug.LogWarning($"No se encontró EnemyController en el objeto con PhotonViewID {enemyPhotonViewID}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"No se encontró PhotonView con el ID {enemyPhotonViewID}");
         }
     }
 

@@ -30,7 +30,6 @@ public class EnemyController : MonoBehaviour, IDamageable
         {
             FollowPlayer();
         }
-        Debug.Log(zombieStats.health);
     }
 
     private void FindClosestPlayer()
@@ -70,14 +69,17 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void Die()
     {
         Debug.Log($"{gameObject.name} ha muerto.");
-
-        if (Random.Range(0f, 1f) <= zombieStats.dropChance)
-        {
-            DropItem();
-        }
-
         Photon.Pun.PhotonNetwork.Destroy(gameObject);
         StatsManager.instance.AddHighScoreToPool(zombieStats.scoreValue);
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (Random.Range(0f, 1f) <= zombieStats.dropChance)
+            {
+                DropItem();
+            }
+        }
+            
     }
 
     private void DropItem()

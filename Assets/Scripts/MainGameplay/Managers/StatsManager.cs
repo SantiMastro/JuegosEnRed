@@ -40,31 +40,26 @@ public class StatsManager : MonoBehaviour
     {
         totalCoins += coinsValue;
         UpdateText();
-        Debug.Log("Total coins is: " + totalCoins);
     }
     public void AddPistolAmmoToPool(int pistolAmmoValue)
     {
         totalPistolAmmo += pistolAmmoValue;
         UpdateText();
-        Debug.Log("Total PISTOL_AMMO is: " + totalPistolAmmo);
     }
     public void AddShotgunAmmoToPool(int shotgunAmmoValue)
     {
         totalShotgunAmmo += shotgunAmmoValue;
         UpdateText();
-        Debug.Log("Total SHOTGUN_AMMO is: " + totalShotgunAmmo);
     }
     public void AddUziAmmoToPool(int uziAmmoValue)
     {
         totalUziAmmo += uziAmmoValue;
         UpdateText();
-        Debug.Log("Total UZI_AMMO is: " + totalUziAmmo);
     }
     public void AddHighScoreToPool(int highScoreValue)
     {
         totalHighScore += highScoreValue;
         UpdateText();
-        Debug.Log("Total HIGH_SCORE is: " + highScoreValue);
     }
 
     public void UpdateText()

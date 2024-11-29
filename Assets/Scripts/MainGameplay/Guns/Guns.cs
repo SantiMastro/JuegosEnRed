@@ -20,8 +20,11 @@ public class Guns : MonoBehaviour, IGuns
     private Camera cam;
 
     void Start()
-    {
-        cam = player.GetComponentInChildren<Camera>();
+    {   
+        if (player != null)
+        {
+            cam = player.GetComponentInChildren<Camera>();
+        }
     }
 
     void Update()
@@ -31,12 +34,15 @@ public class Guns : MonoBehaviour, IGuns
 
     public void PointShoot()
     {
-        Vector3 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
-        Vector3 direction = mousePosition - gun.position;
+        if (cam != null)
+        {
+            Vector3 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0;
+            Vector3 direction = mousePosition - gun.position;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        gun.rotation = Quaternion.Euler(0, 0, angle);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            gun.rotation = Quaternion.Euler(0, 0, angle);
+        }
     }
 
     public virtual void Shoot() => Debug.Log("Disparo");

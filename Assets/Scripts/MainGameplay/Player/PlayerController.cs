@@ -33,12 +33,10 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (pv.IsMine)
         {
             _nicknamePlayer.text = PhotonNetwork.NickName.ToString();
-            Debug.Log(PhotonNetwork.NickName);
         }
         else
         {
             _nicknamePlayer.text = pv.Owner.NickName.ToString();
-            Debug.Log(pv.Owner.NickName);
         }
     }
 
@@ -50,8 +48,6 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        Debug.Log(_currentHealth + name);
-
         if (pv.IsMine)
         {
             Move();
@@ -130,7 +126,6 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (pv.IsMine)
         {
             _currentHealth -= damage;
-            Debug.Log($"{_currentHealth} + {name}");
             StatsManager.instance.UpdateHealth(_currentHealth, _maxHealth);
 
             if (_currentHealth <= 0)
