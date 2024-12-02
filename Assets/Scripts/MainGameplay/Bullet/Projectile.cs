@@ -49,12 +49,26 @@ public class Projectile : MonoBehaviour, IProjectile
         {
             _pv.RPC("ApplyDamageToEnemy", RpcTarget.AllBuffered, targetPhotonView.ViewID, _owner != null ? _owner.Damage : 0);
 
-            PhotonNetwork.Destroy(gameObject);
+            if (_pv.IsMine)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
+            else
+            {
+                _pv.RPC("DestroyProjectile", RpcTarget.MasterClient);
+            }
         }
 
         if (other.gameObject.layer == 6)
         {
-            PhotonNetwork.Destroy(gameObject);
+            if (_pv.IsMine)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
+            else
+            {
+                _pv.RPC("DestroyProjectile", RpcTarget.MasterClient);
+            }
         }
     }
 
@@ -78,6 +92,12 @@ public class Projectile : MonoBehaviour, IProjectile
         {
             Debug.LogWarning($"No se encontró PhotonView con el ID {enemyPhotonViewID}");
         }
+    }
+
+    [PunRPC]
+    void DestroyProjectile()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 
     public void SetOwner(IGuns guns) => _owner = guns;

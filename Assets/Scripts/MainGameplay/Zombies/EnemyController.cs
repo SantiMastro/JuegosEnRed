@@ -69,17 +69,26 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void Die()
     {
         Debug.Log($"{gameObject.name} ha muerto.");
-        Photon.Pun.PhotonNetwork.Destroy(gameObject);
-        StatsManager.instance.AddHighScoreToPool(zombieStats.scoreValue);
 
-        if (PhotonNetwork.IsMasterClient)
+        PhotonView enemyPhotonView = GetComponent<PhotonView>();
+
+        if (enemyPhotonView != null && enemyPhotonView.IsMine)
         {
-            if (Random.Range(0f, 1f) <= zombieStats.dropChance)
+            PhotonNetwork.Destroy(gameObject);
+            StatsManager.instance.AddHighScoreToPool(zombieStats.scoreValue);
+
+            if (PhotonNetwork.IsMasterClient)
             {
-                DropItem();
+                if (Random.Range(0f, 1f) <= zombieStats.dropChance)
+                {
+                    DropItem();
+                }
             }
         }
-            
+        else
+        {
+            enemyPhotonView.RPC("DestroyEnemy", RpcTarget.MasterClient);
+        }
     }
 
     private void DropItem()
@@ -129,5 +138,11 @@ public class EnemyController : MonoBehaviour, IDamageable
                 playerController.TakeDamage(zombieStats.damage);
             }
         }
+    }
+
+    [PunRPC]
+    void DestroyEnemy()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }

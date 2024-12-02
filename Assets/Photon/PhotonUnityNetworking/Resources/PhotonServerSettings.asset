@@ -52,6 +52,10 @@ MonoBehaviour:
   - SetPlayerState
   - ToggleShop
   - SetShopActive
+  - DestroyCoin
+  - DestroyAmmo
+  - DestroyEnemy
+  - DestroyProjectile
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
