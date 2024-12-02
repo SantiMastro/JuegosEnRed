@@ -105,6 +105,10 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             SwitchGuns(1);
         }
+        if (Input.GetKey(KeyCode.Alpha3) && isDead == false)
+        {
+            SwitchGuns(2);
+        }
         _animator.SetInteger("MovementDirection", direction);
     }
 

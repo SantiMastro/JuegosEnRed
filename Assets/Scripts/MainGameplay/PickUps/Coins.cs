@@ -30,22 +30,12 @@ public class Coins : MonoBehaviour
             if (coinPhotonView.IsMine)
             {
                 PhotonNetwork.Destroy(coinPhotonView.gameObject);
-
-                if (playerPhotonView != null && playerPhotonView.IsMine)
-                {
-                    StatsManager.instance.AddCoinToPool(coinValue);
-                }
             }
-            else
+
+            if (playerPhotonView != null && playerPhotonView.IsMine)
             {
-                coinPhotonView.RPC("DestroyCoin", RpcTarget.MasterClient);
+                StatsManager.instance.AddCoinToPool(coinValue);
             }
         }
-    }
-
-    [PunRPC]
-    void DestroyCoin()
-    {
-        PhotonNetwork.Destroy(gameObject);
     }
 }

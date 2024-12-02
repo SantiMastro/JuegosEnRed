@@ -34,33 +34,23 @@ public class Ammo : MonoBehaviour
             if (ammoPhotonView.IsMine)
             {
                 PhotonNetwork.Destroy(ammoPhotonView.gameObject);
+            }
 
-                if (playerPhotonView != null && playerPhotonView.IsMine)
+            if (playerPhotonView != null && playerPhotonView.IsMine)
+            {
+                if (isPistol)
                 {
-                    if (isPistol)
-                    {
-                        StatsManager.instance.AddPistolAmmoToPool(ammoValue);
-                    }
-                    if (isShotgun)
-                    {
-                        StatsManager.instance.AddShotgunAmmoToPool(ammoValue);
-                    }
-                    if (isUzi)
-                    {
-                        StatsManager.instance.AddUziAmmoToPool(ammoValue);
-                    }
+                    StatsManager.instance.AddPistolAmmoToPool(ammoValue);
+                }
+                if (isShotgun)
+                {
+                    StatsManager.instance.AddShotgunAmmoToPool(ammoValue);
+                }
+                if (isUzi)
+                {
+                    StatsManager.instance.AddUziAmmoToPool(ammoValue);
                 }
             }
-            else
-            {
-                ammoPhotonView.RPC("DestroyAmmo", RpcTarget.MasterClient);
-            }
         }
-    }
-
-    [PunRPC]
-    void DestroyAmmo()
-    {
-        PhotonNetwork.Destroy(gameObject);
     }
 }
