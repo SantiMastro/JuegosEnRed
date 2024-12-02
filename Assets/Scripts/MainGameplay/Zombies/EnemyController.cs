@@ -58,7 +58,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log($"{currentHealth} + {name}");
+        //Debug.Log($"{currentHealth} + {name}");
 
         if (currentHealth <= 0)
         {
@@ -74,16 +74,12 @@ public class EnemyController : MonoBehaviour, IDamageable
 
         if (enemyPhotonView != null && enemyPhotonView.IsMine)
         {
-            PhotonNetwork.Destroy(gameObject);
-            StatsManager.instance.AddHighScoreToPool(zombieStats.scoreValue);
-
             if (PhotonNetwork.IsMasterClient)
             {
-                if (Random.Range(0f, 1f) <= zombieStats.dropChance)
-                {
-                    DropItem();
-                }
+                DropItem();
             }
+            PhotonNetwork.Destroy(gameObject);
+            StatsManager.instance.AddHighScoreToPool(zombieStats.scoreValue);
         }
         else
         {
@@ -95,7 +91,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         float dropRoll = Random.Range(0f, 1f);
 
-        float dropChance = zombieStats.goldCoinDropChance + zombieStats.silverCoinDropChance + zombieStats.bronzeCoinDropChance + zombieStats.pistolAmmoDropChance + zombieStats.uziAmmoDropChance + zombieStats.shotgunAmmoDropChance;
+        float dropChance = zombieStats.dropChance;
 
         if (dropRoll <= dropChance)
         {
@@ -125,6 +121,10 @@ public class EnemyController : MonoBehaviour, IDamageable
             {
                 PhotonNetwork.Instantiate(zombieStats.shotgunAmmoPrefab.name, transform.position, Quaternion.identity);
             }
+        }
+        else
+        {
+           
         }
     }
 

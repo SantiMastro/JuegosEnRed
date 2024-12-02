@@ -105637,7 +105637,7 @@ MonoBehaviour:
   totalCoins: 0
   totalPistolAmmo: 30
   totalShotgunAmmo: 0
-  totalUziAmmo: 0
+  totalUziAmmo: 999
   totalHighScore: 0
   healthBarFill: {fileID: 274268867}
   currentLifePlayer: 0
