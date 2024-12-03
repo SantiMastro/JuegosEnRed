@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Photon.Pun;
 
@@ -38,6 +37,7 @@ public class Projectile : MonoBehaviour, IProjectile
 
     public void LaunchProjectile(Vector2 direction)
     {
+        _pv.TransferOwnership(PhotonNetwork.LocalPlayer);
         _projectileRb.velocity = direction * _speed;
         Destroy(gameObject, _lifeTime);
     }
@@ -55,7 +55,7 @@ public class Projectile : MonoBehaviour, IProjectile
             }
             else
             {
-                _pv.RPC("DestroyProjectile", RpcTarget.MasterClient);
+                _pv.RPC("DestroyProjectile", RpcTarget.AllBuffered); 
             }
         }
 
@@ -67,7 +67,7 @@ public class Projectile : MonoBehaviour, IProjectile
             }
             else
             {
-                _pv.RPC("DestroyProjectile", RpcTarget.MasterClient);
+                _pv.RPC("DestroyProjectile", RpcTarget.AllBuffered);
             }
         }
     }
@@ -97,7 +97,10 @@ public class Projectile : MonoBehaviour, IProjectile
     [PunRPC]
     void DestroyProjectile()
     {
-        PhotonNetwork.Destroy(gameObject);
+        if (_pv.IsMine)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 
     public void SetOwner(IGuns guns) => _owner = guns;
