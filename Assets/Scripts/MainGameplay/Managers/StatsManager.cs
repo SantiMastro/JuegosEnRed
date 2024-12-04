@@ -18,11 +18,18 @@ public class StatsManager : MonoBehaviour
 
     public static StatsManager instance;
 
+    [Header("UI - Textos")]
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI coinsText;
     public TextMeshProUGUI pistolText;
     public TextMeshProUGUI shotgunText;
     public TextMeshProUGUI uziText;
+
+    [Header("UI - TiendaTextos")]
+    public TextMeshProUGUI TcoinsText;
+    public TextMeshProUGUI TpistolText;
+    public TextMeshProUGUI TshotgunText;
+    public TextMeshProUGUI TuziText;
 
     private void Awake()
     {
@@ -83,6 +90,23 @@ public class StatsManager : MonoBehaviour
         if (highScoreText != null)
         {
             highScoreText.text = totalHighScore.ToString();
+        }
+
+        if (TcoinsText != null)
+        {
+            TcoinsText.text = totalCoins.ToString();
+        }
+        if (TpistolText != null)
+        {
+            TpistolText.text = totalPistolAmmo.ToString();
+        }
+        if (TshotgunText != null)
+        {
+            TshotgunText.text = totalShotgunAmmo.ToString();
+        }
+        if (TuziText != null)
+        {
+            TuziText.text = totalUziAmmo.ToString();
         }
     }
 

@@ -139,6 +139,15 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
 
+    public void SetHealth()
+    {
+        if (pv.IsMine)
+        {
+            _currentHealth = _maxHealth;
+            StatsManager.instance.UpdateHealth(_currentHealth, _maxHealth);
+        }
+    }
+
     public void Die()
     {
         if (pv.IsMine)

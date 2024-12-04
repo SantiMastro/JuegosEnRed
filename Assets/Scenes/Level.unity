@@ -86760,7 +86760,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 337956628}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 992107454}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: BuyUziAmmo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &337956628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102404,7 +102416,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 990763333}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 992107454}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: BuyShotgunAmmo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &990763333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102452,6 +102476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 992107453}
+  - component: {fileID: 992107454}
   m_Layer: 5
   m_Name: Shop_UI
   m_TagString: Untagged
@@ -102498,6 +102523,31 @@ RectTransform:
   m_AnchoredPosition: {x: -170, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &992107454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992107452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ede7f5f93d25c4fba01133e7aaf7d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsManager: {fileID: 1505380439}
+  pistolAmmoPrice: 5
+  shotgunAmmoPrice: 7
+  uziAmmoPrice: 15
+  fullHealthPrice: 15
+  coinsText: {fileID: 1753509985}
+  pistolAmmoText: {fileID: 1972258892}
+  shotgunAmmoText: {fileID: 756212392}
+  uziAmmoText: {fileID: 310259827}
+  TcoinsText: {fileID: 948191121}
+  TpistolAmmoText: {fileID: 1615329886}
+  TshotgunAmmoText: {fileID: 516589600}
+  TuziAmmoText: {fileID: 1696916185}
 --- !u!1 &1007897544
 GameObject:
   m_ObjectHideFlags: 0
@@ -105699,7 +105749,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1495116792}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 992107454}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: BuyFullHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1495116792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105779,6 +105841,10 @@ MonoBehaviour:
   pistolText: {fileID: 1972258892}
   shotgunText: {fileID: 756212392}
   uziText: {fileID: 310259827}
+  TcoinsText: {fileID: 948191121}
+  TpistolText: {fileID: 1615329886}
+  TshotgunText: {fileID: 516589600}
+  TuziText: {fileID: 1696916185}
 --- !u!4 &1505380440
 Transform:
   m_ObjectHideFlags: 0
@@ -110592,7 +110658,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1992428368}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 992107454}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: BuyPistolAmmo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1992428368
 MonoBehaviour:
   m_ObjectHideFlags: 0
