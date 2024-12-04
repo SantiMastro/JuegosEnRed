@@ -12,6 +12,7 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private GameObject textGameStart;
     [SerializeField] private GameObject waitingPlayers;
     [SerializeField] private GameObject shop;
+    [SerializeField] private GameObject roundClearSign;
     [SerializeField] private Transform[] spawnPoints; // Array de spawn points
 
 
@@ -135,10 +136,20 @@ public class EnemySpawn : MonoBehaviour
 
         if (PhotonNetwork.IsMasterClient)
         {
-            photonView.RPC("SetShopActive", RpcTarget.All, true);
+            photonView.RPC("SetSignRoundClear", RpcTarget.AllBuffered, true);
+
+            StartCoroutine(ShowShopAfterDelay());
         }
 
         Debug.Log($"Oleada {waveNumber} completada.");
+    }
+
+    private IEnumerator ShowShopAfterDelay()
+    {
+        yield return new WaitForSeconds(5f);
+
+        photonView.RPC("SetSignRoundClear", RpcTarget.AllBuffered, false);
+        photonView.RPC("SetShopActive", RpcTarget.AllBuffered, true);
     }
 
     private void SpawnZombie()
@@ -173,5 +184,10 @@ public class EnemySpawn : MonoBehaviour
     public void SetShopActive(bool isActive)
     {
         shop.SetActive(isActive);
+    }
+    [PunRPC]
+    public void SetSignRoundClear(bool isActive)
+    {
+        roundClearSign.SetActive(isActive);
     }
 }
