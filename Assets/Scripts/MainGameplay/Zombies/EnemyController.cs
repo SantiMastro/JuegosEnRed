@@ -13,11 +13,13 @@ public class EnemyController : MonoBehaviour, IDamageable
     [SerializeField] private LayerMask _hitteableLater;
 
     private Transform closestPlayerTransform;
+    private PhotonView _pv;
     private Rigidbody2D rb;
     public int currentHealth;
 
     private void Start()
     {
+        _pv = GetComponent<PhotonView>();
         rb = GetComponent<Rigidbody2D>();
         currentHealth = MaxHealt;
     }
@@ -68,22 +70,16 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        Debug.Log($"{gameObject.name} ha muerto.");
-
-        PhotonView enemyPhotonView = GetComponent<PhotonView>();
-
-        if (enemyPhotonView != null && enemyPhotonView.IsMine)
+        if (_pv.IsMine)
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                DropItem();
+                _pv.RPC("AddScoreToAllPlayers", RpcTarget.AllBuffered, zombieStats.scoreValue);
             }
+
+            DropItem();
+
             PhotonNetwork.Destroy(gameObject);
-            StatsManager.instance.AddHighScoreToPool(zombieStats.scoreValue);
-        }
-        else
-        {
-            enemyPhotonView.RPC("DestroyEnemy", RpcTarget.MasterClient);
         }
     }
 
@@ -141,8 +137,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     }
 
     [PunRPC]
-    void DestroyEnemy()
+    private void AddScoreToAllPlayers(int score)
     {
-        PhotonNetwork.Destroy(gameObject);
+        StatsManager.instance.AddHighScoreToPool(score);
     }
 }
