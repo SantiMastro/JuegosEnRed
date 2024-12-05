@@ -13,6 +13,8 @@ public class ShopManager : MonoBehaviour
     public int shotgunAmmoPrice = 7;
     public int uziAmmoPrice = 15;
     public int fullHealthPrice = 15;
+    public int shotgunPrice = 20;
+    public int uziPrice = 20;
 
     [Header("UI - Textos")]
     public TextMeshProUGUI coinsText;
@@ -84,7 +86,7 @@ public class ShopManager : MonoBehaviour
 
     public void BuyShotgun()
     {
-        if (statsManager.totalCoins >= shotgunAmmoPrice)
+        if (statsManager.totalCoins >= shotgunPrice)
         {
             GameObject playerObject = PhotonNetwork.LocalPlayer.TagObject as GameObject;
 
@@ -94,7 +96,7 @@ public class ShopManager : MonoBehaviour
 
                 if (playerController != null)
                 {
-                    statsManager.AddCoinToPool(-fullHealthPrice);
+                    statsManager.AddCoinToPool(-shotgunPrice);
                     playerController.shotgunPurchased = true;
                     NotPurchasedShotgun.SetActive(false);
                     PurchasedShotgun.SetActive(true);
@@ -102,11 +104,15 @@ public class ShopManager : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            Debug.Log("No tienes suficientes monedas para comprar la Shotgun.");
+        }
     }
 
     public void BuyUzi()
     {
-        if (statsManager.totalCoins >= shotgunAmmoPrice)
+        if (statsManager.totalCoins >= uziPrice)
         {
             GameObject playerObject = PhotonNetwork.LocalPlayer.TagObject as GameObject;
 
@@ -116,13 +122,17 @@ public class ShopManager : MonoBehaviour
 
                 if (playerController != null)
                 {
-                    statsManager.AddCoinToPool(-fullHealthPrice);
+                    statsManager.AddCoinToPool(-uziPrice);
                     playerController.uziPurchased = true;
                     NotPurchasedUzi.SetActive(false);
                     PurchasedUzi.SetActive(true);
                     UpdateUI();
                 }
             }
+        }
+        else
+        {
+            Debug.Log("No tienes suficientes monedas para comprar la Uzi.");
         }
     }
 

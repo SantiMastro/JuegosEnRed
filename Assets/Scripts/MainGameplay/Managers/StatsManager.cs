@@ -48,7 +48,16 @@ public class StatsManager : MonoBehaviour
 
     public void AddCoinToPool(int coinsValue)
     {
-        totalCoins += coinsValue;
+        if (totalCoins + coinsValue >= 0)
+        {
+            totalCoins += coinsValue;
+            UpdateText();
+        }
+        else
+        {
+            totalCoins = 0;
+            UpdateText();
+        }
         UpdateText();
     }
     public void AddPistolAmmoToPool(int pistolAmmoValue)
