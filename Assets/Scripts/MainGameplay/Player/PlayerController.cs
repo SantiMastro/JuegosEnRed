@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public int CurrentHealth => _currentHealth;
 
     [SerializeField] private int _maxHealth = 100;
-    [SerializeField] private int _speed = 5;
+    [SerializeField] public int _speed = 5;
     [SerializeField] TMPro.TextMeshPro _nicknamePlayer;
     [SerializeField] private IGuns _guns;
     [SerializeField] List<Guns> _gunsList;
