@@ -26,6 +26,11 @@ public class ShopManager : MonoBehaviour
     public TextMeshProUGUI TshotgunAmmoText;
     public TextMeshProUGUI TuziAmmoText;
 
+    [Header("UI - TiendaArmas")]
+    public GameObject NotPurchasedShotgun;
+    public GameObject NotPurchasedUzi;
+    public GameObject PurchasedShotgun;
+    public GameObject PurchasedUzi;
 
     public void BuyPistolAmmo()
     {
@@ -71,6 +76,50 @@ public class ShopManager : MonoBehaviour
                 {
                     statsManager.AddCoinToPool(-fullHealthPrice);
                     playerController.SetHealth();
+                    UpdateUI();
+                }
+            }
+        }
+    }
+
+    public void BuyShotgun()
+    {
+        if (statsManager.totalCoins >= shotgunAmmoPrice)
+        {
+            GameObject playerObject = PhotonNetwork.LocalPlayer.TagObject as GameObject;
+
+            if (playerObject != null)
+            {
+                PlayerController playerController = playerObject.GetComponent<PlayerController>();
+
+                if (playerController != null)
+                {
+                    statsManager.AddCoinToPool(-fullHealthPrice);
+                    playerController.shotgunPurchased = true;
+                    NotPurchasedShotgun.SetActive(false);
+                    PurchasedShotgun.SetActive(true);
+                    UpdateUI();
+                }
+            }
+        }
+    }
+
+    public void BuyUzi()
+    {
+        if (statsManager.totalCoins >= shotgunAmmoPrice)
+        {
+            GameObject playerObject = PhotonNetwork.LocalPlayer.TagObject as GameObject;
+
+            if (playerObject != null)
+            {
+                PlayerController playerController = playerObject.GetComponent<PlayerController>();
+
+                if (playerController != null)
+                {
+                    statsManager.AddCoinToPool(-fullHealthPrice);
+                    playerController.uziPurchased = true;
+                    NotPurchasedUzi.SetActive(false);
+                    PurchasedUzi.SetActive(true);
                     UpdateUI();
                 }
             }

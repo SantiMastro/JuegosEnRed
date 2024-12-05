@@ -7,6 +7,15 @@ using UnityEngine.SceneManagement;
 public class DeathManager : MonoBehaviour
 {
     public GameObject[] players;
+    public GameObject FinalScoreMenu;
+    public StatsManager _statsManager;
+
+    private PhotonView photonView;
+
+    private void Start()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
 
     private void CheckAllPlayersDead()
     {
@@ -24,15 +33,18 @@ public class DeathManager : MonoBehaviour
 
         if (allDead)
         {
-            GoToMainMenu();
+            photonView.RPC("FinalScoreActive", RpcTarget.AllBuffered, true);
         }
     }
 
     private void GoToMainMenu()
     {
-        PhotonNetwork.LeaveRoom();
-        PhotonNetwork.Disconnect();
-        SceneManager.LoadScene("MainMenu");
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.Disconnect();
+            SceneManager.LoadScene("MainMenu");
+        }  
     }
 
     private void Update()
@@ -43,5 +55,20 @@ public class DeathManager : MonoBehaviour
 
             CheckAllPlayersDead();
         }
+    }
+
+    private IEnumerator DisconnectToServer()
+    {
+        yield return new WaitForSeconds(5f);
+
+        GoToMainMenu();
+    }
+
+    [PunRPC]
+    public void FinalScoreActive(bool isActive)
+    {
+        _statsManager.UpdateFinalHighscore();
+        FinalScoreMenu.SetActive(isActive);
+        StartCoroutine(DisconnectToServer());
     }
 }

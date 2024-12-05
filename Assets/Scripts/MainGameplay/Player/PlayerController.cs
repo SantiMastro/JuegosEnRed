@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     private Animator _animator;
     private float timerRunTheWave;
     private bool hasTeleported = false;
+
+    public bool shotgunPurchased = false;
+    public bool uziPurchased = false;
+    
     [SerializeField] public bool isDead { get; private set; }
 
     private void Awake()
@@ -101,11 +105,11 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             SwitchGuns(0);
         }
-        if (Input.GetKey(KeyCode.Alpha2) && isDead == false)
+        if (Input.GetKey(KeyCode.Alpha2) && isDead == false && shotgunPurchased == true)
         {
             SwitchGuns(1);
         }
-        if (Input.GetKey(KeyCode.Alpha3) && isDead == false)
+        if (Input.GetKey(KeyCode.Alpha3) && isDead == false && uziPurchased == true)
         {
             SwitchGuns(2);
         }

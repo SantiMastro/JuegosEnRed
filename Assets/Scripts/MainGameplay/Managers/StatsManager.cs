@@ -31,6 +31,9 @@ public class StatsManager : MonoBehaviour
     public TextMeshProUGUI TshotgunText;
     public TextMeshProUGUI TuziText;
 
+    [Header("UI - FinalScore")]
+    public TextMeshProUGUI FinalScore;
+
     private void Awake()
     {
         if (instance == null)
@@ -107,6 +110,14 @@ public class StatsManager : MonoBehaviour
         if (TuziText != null)
         {
             TuziText.text = totalUziAmmo.ToString();
+        }
+    }
+
+    public void UpdateFinalHighscore()
+    {
+        if (FinalScore != null)
+        {
+            FinalScore.text = totalHighScore.ToString();
         }
     }
 

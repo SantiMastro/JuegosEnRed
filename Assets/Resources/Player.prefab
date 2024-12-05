@@ -1188,6 +1188,8 @@ MonoBehaviour:
   - {fileID: 7826901040380788953}
   - {fileID: 2415788402277903482}
   _currentHealth: 0
+  shotgunPurchased: 0
+  uziPurchased: 0
 --- !u!114 &99398872718251063
 MonoBehaviour:
   m_ObjectHideFlags: 0
