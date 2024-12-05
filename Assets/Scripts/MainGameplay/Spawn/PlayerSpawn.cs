@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
 public class PlayerSpawn : MonoBehaviour
@@ -16,10 +17,10 @@ public class PlayerSpawn : MonoBehaviour
 
     private void Start()
     {
-        // Instanciamos el jugador en una posición aleatoria
-        _player = PhotonNetwork.Instantiate(_playerPrefab.name, new Vector2(Random.Range(52, 58), Random.Range(11, 6)), Quaternion.identity);
+        _player = PhotonNetwork.Instantiate(_playerPrefab.name, new Vector2(Random.Range(52, 58), Random.Range(11, 6)), Quaternion.identity, 0, new object[] { PhotonNetwork.LocalPlayer });
+        PhotonNetwork.LocalPlayer.TagObject = _player;
     }
-    
+
 }
     //[PunRPC]
     //private void ChangeColor(int playerViewID, int playerIndex)

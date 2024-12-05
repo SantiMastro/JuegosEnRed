@@ -26,7 +26,6 @@ public class ShopManager : MonoBehaviour
     public TextMeshProUGUI TshotgunAmmoText;
     public TextMeshProUGUI TuziAmmoText;
 
-    private PlayerController playerController;
 
     public void BuyPistolAmmo()
     {
@@ -60,21 +59,22 @@ public class ShopManager : MonoBehaviour
 
     public void BuyFullHealth()
     {
-        //if (statsManager.totalCoins >= fullHealthPrice)
-        //{
-        //    if (statsManager.totalCoins >= fullHealthPrice)
-        //    {
-        //        statsManager.AddCoinToPool(-fullHealthPrice);
+        if (statsManager.totalCoins >= fullHealthPrice)
+        {
+            GameObject playerObject = PhotonNetwork.LocalPlayer.TagObject as GameObject;
 
-        //        playerController = PhotonNetwork.LocalPlayer.TagObject as PlayerController;
-        //        if (playerController != null)
-        //        {
-        //            playerController.SetHealth();
-        //        }
+            if (playerObject != null)
+            {
+                PlayerController playerController = playerObject.GetComponent<PlayerController>();
 
-        //        UpdateUI();
-        //    }
-        //}
+                if (playerController != null)
+                {
+                    statsManager.AddCoinToPool(-fullHealthPrice);
+                    playerController.SetHealth();
+                    UpdateUI();
+                }
+            }
+        }
     }
 
     private void UpdateUI()
@@ -112,12 +112,6 @@ public class ShopManager : MonoBehaviour
         {
             TuziAmmoText.text = statsManager.totalUziAmmo.ToString();
         }
-
-        //if (statsManager.healthBarFill != null)
-        //{
-        //    float healthPercentage = (float)statsManager.currentLifePlayer / statsManager.currentLifePlayer;
-        //    statsManager.healthBarFill.fillAmount = healthPercentage;
-        //}
     }
 }
 

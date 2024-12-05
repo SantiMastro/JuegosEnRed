@@ -102548,6 +102548,7 @@ MonoBehaviour:
   TpistolAmmoText: {fileID: 1615329886}
   TshotgunAmmoText: {fileID: 516589600}
   TuziAmmoText: {fileID: 1696916185}
+  playerController: {fileID: 6966998058888463322, guid: 18bd4c01f320149429b1373147f45ab7, type: 3}
 --- !u!1 &1007897544
 GameObject:
   m_ObjectHideFlags: 0
