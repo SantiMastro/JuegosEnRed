@@ -106269,7 +106269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalCoins: 0
-  totalPistolAmmo: 300
+  totalPistolAmmo: 30
   totalShotgunAmmo: 0
   totalUziAmmo: 0
   totalHighScore: 0
@@ -108910,6 +108910,8 @@ MonoBehaviour:
   timeToStartSpawning: 10
   timeBetweenSpawn: 2
   timeBetweenWaves: 10
+  waveActive: 0
+  iCanShoot: 0
 --- !u!4 &1663884504
 Transform:
   m_ObjectHideFlags: 0
