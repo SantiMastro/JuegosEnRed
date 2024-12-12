@@ -25,10 +25,11 @@ public class EnemySpawn : MonoBehaviour
     private int totalZombiesToSpawn = 10; // Zombies en la primera oleada
     private int zombiesSpawned = 0;
     private int normalZombies, fastZombies, tankZombies;
-    private bool waveActive = false;
+    public bool waveActive = false;
     private float timer;
     private bool matchStarted = false;
     private bool countIsComplete = false;
+    public bool iCanShoot;
 
     private PhotonView photonView;
 
@@ -96,6 +97,8 @@ public class EnemySpawn : MonoBehaviour
             photonView.RPC("SetShopActive", RpcTarget.AllBuffered, false);
         }
 
+        photonView.RPC("CanCanShoot", RpcTarget.AllBuffered);
+
         // Aumenta el total de zombies en un 20% respecto a la oleada anterior
         if (waveNumber > 1)
         {
@@ -133,6 +136,8 @@ public class EnemySpawn : MonoBehaviour
         waveActive = false;
         waveNumber++;
         timer = -timeBetweenWaves; // Espera entre oleadas
+
+        photonView.RPC("NoCanShoot", RpcTarget.AllBuffered);
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -189,5 +194,15 @@ public class EnemySpawn : MonoBehaviour
     public void SetSignRoundClear(bool isActive)
     {
         roundClearSign.SetActive(isActive);
+    }
+    [PunRPC]
+    public void NoCanShoot()
+    {
+        iCanShoot = false;
+    }
+    [PunRPC]
+    public void CanCanShoot()
+    {
+        iCanShoot = true;
     }
 }

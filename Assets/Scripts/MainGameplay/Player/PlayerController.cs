@@ -24,11 +24,14 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public bool shotgunPurchased = false;
     public bool uziPurchased = false;
-    
+
+    EnemySpawn enemySpawn;
+
     [SerializeField] public bool isDead { get; private set; }
 
     private void Awake()
     {
+        enemySpawn = FindObjectOfType<EnemySpawn>();
         pv = GetComponent<PhotonView>();
         _camera = GetComponentInChildren<Camera>();
         _animator = GetComponent<Animator>();
@@ -97,7 +100,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             transform.position += Vector3.right * _speed * Time.deltaTime;
             direction = 2;
         }
-        if (Input.GetKey(KeyCode.Mouse0) && isDead == false)
+        if (Input.GetKey(KeyCode.Mouse0) && isDead == false && enemySpawn.iCanShoot == true)
         {
             _guns.Shoot();
         }
